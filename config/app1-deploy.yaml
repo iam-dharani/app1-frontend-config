@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-fe
+spec:
+  selector:
+    matchLabels:
+      app: app1-fe
+  template:
+    metadata:
+      labels:
+        app: app1-fe
+    spec:
+      containers:
+      - name: app1-fe
+        image: nginx
+        ports:
+        - containerPort: 80
+        command:
+          - /bin/sh
+          - -c
+          - |
+            echo "this is frontend app1" > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'
