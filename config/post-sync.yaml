@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: post-sync
+  namespace: app1-ns
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded   
+spec:
+  template:
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command:
+          - sh
+          - -c
+          - |
+            echo "Migrating Database"
+            echo "Migration successfull postsync"
+      restartPolicy: Never
